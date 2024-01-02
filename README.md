@@ -1,265 +1,221 @@
-<div align="center">
-    <h2>Hands-on LLMs Course </h2>
-    <h1>Learn to Train and Deploy a Real-Time Financial Advisor</h1>
-    <i>by <a href="https://github.com/iusztinpaul">Paul Iusztin</a>, <a href="https://github.com/Paulescu">Pau Labarta Bajo</a> and <a href="https://github.com/Joywalker">Alexandru Razvant</a></i>
+<div class="Box-sc-g0xbh4-0 bJMeLZ js-snippet-clipboard-copy-unpositioned" data-hpc="true"><article class="markdown-body entry-content container-lg" itemprop="text"><div align="center" dir="auto">
+    <h2 tabindex="-1" dir="auto"><a id="user-content-hands-on-llms-course-" class="anchor" aria-hidden="true" tabindex="-1" href="#hands-on-llms-course-"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">LLM实践课程</font></font></h2>
+    <h1 tabindex="-1" dir="auto"><a id="user-content-learn-to-train-and-deploy-a-real-time-financial-advisor" class="anchor" aria-hidden="true" tabindex="-1" href="#learn-to-train-and-deploy-a-real-time-financial-advisor"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">学习培训和部署实时财务顾问</font></font></h1>
+    <i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：</font></font><a href="https://github.com/iusztinpaul"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Paul Iusztin</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">、</font></font><a href="https://github.com/Paulescu"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pau Labarta Bajo</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><a href="https://github.com/Joywalker"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Alexandru Razvant</font></font></a></i>
 </div>
-
-## Table of Contents
-
-- [1. Building Blocks](#1-building-blocks)
-    - [1.1. Training Pipeline](#11-training-pipeline)
-    - [1.2. Streaming Real-time Pipeline](#12-streaming-real-time-pipeline)
-    - [1.3. Inference Pipeline](#13-inference-pipeline)
-    - [1.4. Financial Q&A Dataset](#14-financial-qa-dataset)
-- [2. Setup External Services](#2-setup-external-services)
-    - [2.1. Alpaca](#21-alpaca)
-    - [2.2. Qdrant](#22-qdrant)
-    - [2.3. Comet ML](#23-comet-ml)
-    - [2.4. Beam](#24-beam)
-    - [2.5. AWS](#25-aws)
-- [3. Install & Usage](#3-install--usage)
-- [4. Video lectures](#4-video-lectures)
-- [5. License](#5-license)
-- [6. Contributors & Teachers](#6-contributors--teachers)
-
-------
-
-
-## 1. Building Blocks
-
-*Using the 3-pipeline design, this is what you will learn to build within this course* ↓
-
-### 1.1. Training Pipeline 
-
-Training pipeline that:
-- loads a proprietary Q&A dataset 
-- fine-tunes an open-source LLM using QLoRA
-- logs the training experiments on [Comet ML's](https://www.comet.com?utm_source=thepauls&utm_medium=partner&utm_content=github) experiment tracker & the inference results on [Comet ML's](https://www.comet.com?utm_source=thepauls&utm_medium=partner&utm_content=github) LLMOps dashboard
-- stores the best model on [Comet ML's](https://www.comet.com/site/products/llmops/?utm_source=thepauls&utm_medium=partner&utm_content=github) model registry
-
-The **training pipeline** is **deployed** using [Beam](https://docs.beam.cloud/getting-started/quickstart?utm_source=thepauls&utm_medium=partner&utm_content=github) as a serverless GPU infrastructure.
-
--> Found under the `modules/training_pipeline` directory.
-
-#### 💻 Minimum Hardware Requirements
-* CPU: 4 Cores
-* RAM: 14 GiB
-* VRAM: 10 GiB (mandatory CUDA-enabled Nvidia GPU)
-
-**Note:** Do not worry if you don't have the minimum hardware requirements. We will show you how to deploy the training pipeline to [Beam's](https://docs.beam.cloud/getting-started/quickstart?utm_source=thepauls&utm_medium=partner&utm_content=github) serverless infrastructure and train the LLM there.
-
-### 1.2. Streaming Real-time Pipeline
-
-Real-time feature pipeline that:
-- ingests financial news from [Alpaca](https://alpaca.markets/docs/api-references/market-data-api/news-data/)
-- cleans & transforms the news documents into embeddings in real-time using [Bytewax](https://github.com/bytewax/bytewax?utm_source=thepauls&utm_medium=partner&utm_content=github)
-- stores the embeddings into the [Qdrant Vector DB](https://qdrant.tech/?utm_source=thepauls&utm_medium=partner&utm_content=github)
-
-The **streaming pipeline** is **automatically deployed** on an AWS EC2 machine using a CI/CD pipeline built in GitHub actions.
-
--> Found under the `modules/streaming_pipeline` directory.
-
-#### 💻 Minimum Hardware Requirements
-* CPU: 1 Core
-* RAM: 2 GiB
-* VRAM: -
-
-### 1.3. Inference Pipeline
-
-Inference pipeline that uses [LangChain](https://github.com/langchain-ai/langchain) to create a chain that:
-* downloads the fine-tuned model from [Comet's](https://www.comet.com?utm_source=thepauls&utm_medium=partner&utm_content=github) model registry
-* takes user questions as input
-* queries the [Qdrant Vector DB](https://qdrant.tech/?utm_source=thepauls&utm_medium=partner&utm_content=github) and enhances the prompt with related financial news
-* calls the fine-tuned LLM for financial advice using the initial query, the context from the vector DB, and the chat history
-* persists the chat history into memory 
-* logs the prompt & answer into [Comet ML's](https://www.comet.com/site/products/llmops/?utm_source=thepauls&utm_medium=partner&utm_content=github) LLMOps monitoring feature
-
-The **inference pipeline** is **deployed** using [Beam](https://docs.beam.cloud/deployment/rest-api?utm_source=thepauls&utm_medium=partner&utm_content=github) as a serverless GPU infrastructure, as a RESTful API. Also, it is wrapped under a UI for demo purposes, implemented in [Gradio](https://www.gradio.app/).
-
--> Found under the `modules/financial_bot` directory.
-
-#### 💻 Minimum Hardware Requirements
-* CPU: 4 Cores
-* RAM: 14 GiB
-* VRAM: 8 GiB (mandatory CUDA-enabled Nvidia GPU)
-
-**Note:** Do not worry if you don't have the minimum hardware requirements. We will show you how to deploy the inference pipeline to [Beam's](https://docs.beam.cloud/getting-started/quickstart?utm_source=thepauls&utm_medium=partner&utm_content=github) serverless infrastructure and call the LLM from there.
-
-<br/>
-
-![architecture](media/architecture.png)
-
-
-#### 1.4. Financial Q&A Dataset
-
-We used `GPT3.5` to generate a financial Q&A dataset to fine-tune our open-source LLM to specialize in using financial terms and answering financial questions. Using a large LLM, such as `GPT3.5` to generate a dataset that trains a smaller LLM (e.g., Falcon 7B) is known as **fine-tuning with distillation**. 
-
-→ To understand how we generated the financial Q&A dataset, [check out this article](https://open.substack.com/pub/paulabartabajo/p/how-to-generate-financial-q-and-a?r=1ttoeh&utm_campaign=post&utm_medium=web) written by [Pau Labarta](https://github.com/Paulescu).
-
-→ To see a complete analysis of the financial Q&A dataset, check out the [dataset_analysis](https://github.com/iusztinpaul/hands-on-llms/blob/main/dataset_analysis) subsection of the course written by [Alexandru Razvant](https://github.com/Joywalker).
-
-![EDA](./media/eda_prompts_dataset.png)
-
-
-## 2. Setup External Services
-
-Before diving into the modules, you have to set up a couple of additional external tools for the course.
-
-**NOTE:** You can set them up as you go for every module, as we will point you in every module what you need.
-
-### 2.1. Alpaca
-`financial news data source`
-
-Follow this [document](https://alpaca.markets/docs/market-data/getting-started/) to show you how to create a FREE account and generate the API Keys you will need within this course.
-
-**Note:** 1x Alpaca data connection is FREE.
-
-### 2.2. Qdrant
-`serverless vector DB`
-
-Go to [Qdrant](https://qdrant.tech/?utm_source=thepauls&utm_medium=partner&utm_content=github) and create a FREE account.
-
-After, follow [this document](https://qdrant.tech/documentation/cloud/authentication/?utm_source=thepauls&utm_medium=partner&utm_content=github) on how to generate the API Keys you will need within this course.
-
-**Note:** We will use only Qdrant's freemium plan. 
-
-### 2.3. Comet ML
-`serverless ML platform`
-
-Go to [Comet ML](https://www.comet.com/signup?utm_source=thepauls&utm_medium=partner&utm_content=github) and create a FREE account.
-
-After, [follow this guide](https://www.comet.com/docs/v2/guides/getting-started/quickstart/) to generate an API KEY and a new project, which you will need within the course.
-
-**Note:** We will use only Comet ML's freemium plan. 
-
-### 2.4. Beam
-`serverless GPU compute | training & inference pipelines`
-
-Go to [Beam](https://www.beam.cloud?utm_source=thepauls&utm_medium=partner&utm_content=github) and create a FREE account.
-
-After, you must follow their [installation guide](https://docs.beam.cloud/getting-started/installation?utm_source=thepauls&utm_medium=partner&utm_content=github) to install their CLI & configure it with your Beam credentials.
-
-To read more about Beam, here is an [introduction guide](https://docs.beam.cloud/getting-started/introduction?utm_source=thepauls&utm_medium=partner&utm_content=github).
-
-**Note:** You have ~10 free compute hours. Afterward, you pay only for what you use. If you have an Nvidia GPU >8 GB VRAM & don't want to deploy the training & inference pipelines, using Beam is optional. 
-
-#### Troubleshooting
-
-When using Poetry, we had issues locating the Beam CLI inside a Poetry virtual environment. To fix this, after installing Beam, we create a symlink that points to Poetry's binaries, as follows:
- ```shell
-  export COURSE_MODULE_PATH=<your-course-module-path> # e.g., modules/training_pipeline
-  cd $COURSE_MODULE_PATH
-  export POETRY_ENV_PATH=$(dirname $(dirname $(poetry run which python)))
-
-  ln -s /usr/local/bin/beam ${POETRY_ENV_PATH}/bin/beam
- ```
-
-
- ### 2.5. AWS
- `cloud compute | feature pipeline`
-
- Go to [AWS](https://aws.amazon.com/console/), create an account, and generate a pair of credentials.
-
- After, download and install their [AWS CLI v2.11.22](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and [configure it](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) with your credentials.
-
- **Note:** You will pay only for what you use. You will deploy only a `t2.small` EC2 VM, which is only `~$0.023` / hour. If you don't want to deploy the feature pipeline, using AWS is optional.
-
-
-## 3. Install & Usage
-Every module has its dependencies and scripts. In a production setup, every module would have its repository, but in this use case, for learning purposes, we put everything in one place:
-
-Thus, check out the README for every module individually to see how to install & use it:
-1. [q_and_a_dataset_generator](/modules/q_and_a_dataset_generator/)
-2. [training_pipeline](/modules/training_pipeline/)
-3. [streaming_pipeline](/modules/streaming_pipeline/)
-4. [inference_pipeline](/modules/financial_bot/)
-
-## 4. Video lectures
-
-### 4.0 Intro to the course
-
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=l4HTEf0_s70">
-      <p>Click here to watch the video 🎬</p>
-    <img src="media/youtube_thumbnails/00_intro.png" alt="Intro to the course" style="width:75%;">
+<h2 tabindex="-1" dir="auto"><a id="user-content-table-of-contents" class="anchor" aria-hidden="true" tabindex="-1" href="#table-of-contents"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">目录</font></font></h2>
+<ul dir="auto">
+<li><a href="#1-building-blocks"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. 构建模块</font></font></a>
+<ul dir="auto">
+<li><a href="#11-training-pipeline"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.1. </font><font style="vertical-align: inherit;">培训渠道</font></font></a></li>
+<li><a href="#12-streaming-real-time-pipeline"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.2. </font><font style="vertical-align: inherit;">流式实时管道</font></font></a></li>
+<li><a href="#13-inference-pipeline"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.3. </font><font style="vertical-align: inherit;">推理管道</font></font></a></li>
+<li><a href="#14-financial-qa-dataset"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.4. </font><font style="vertical-align: inherit;">金融问答数据集</font></font></a></li>
+</ul>
+</li>
+<li><a href="#2-setup-external-services"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2. 设置外部服务</font></font></a>
+<ul dir="auto">
+<li><a href="#21-alpaca"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.1. </font><font style="vertical-align: inherit;">羊驼毛</font></font></a></li>
+<li><a href="#22-qdrant"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2. </font><font style="vertical-align: inherit;">象限</font></font></a></li>
+<li><a href="#23-comet-ml"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3. </font><font style="vertical-align: inherit;">彗星ML</font></font></a></li>
+<li><a href="#24-beam"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.4. </font><font style="vertical-align: inherit;">光束</font></font></a></li>
+<li><a href="#25-aws"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.5. </font><font style="vertical-align: inherit;">AWS</font></font></a></li>
+</ul>
+</li>
+<li><a href="#3-install--usage"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3. 安装与使用</font></font></a></li>
+<li><a href="#4-video-lectures"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4. 视频讲座</font></font></a></li>
+<li><a href="#5-license"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5. 许可证</font></font></a></li>
+<li><a href="#6-contributors--teachers"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6. 贡献者和教师</font></font></a></li>
+</ul>
+<hr>
+<h2 tabindex="-1" dir="auto"><a id="user-content-1-building-blocks" class="anchor" aria-hidden="true" tabindex="-1" href="#1-building-blocks"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. 构建模块</font></font></h2>
+<p dir="auto"><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 3 管道设计，这就是您将在本课程中学习构建的内容</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">↓</font></font></p>
+<h3 tabindex="-1" dir="auto"><a id="user-content-11-training-pipeline" class="anchor" aria-hidden="true" tabindex="-1" href="#11-training-pipeline"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.1. </font><font style="vertical-align: inherit;">培训渠道</font></font></h3>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">培训管道：</font></font></p>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">加载专有的问答数据集</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 QLoRA 微调开源 LLM</font></font></li>
+<li><font style="vertical-align: inherit;"></font><a href="https://www.comet.com?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在Comet ML 的</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">实验跟踪器上记录训练实验，并在</font></font><a href="https://www.comet.com?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Comet ML 的</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">LLMOps 仪表板上</font><font style="vertical-align: inherit;">记录推理结果</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将最佳模型存储在</font></font><a href="https://www.comet.com/site/products/llmops/?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Comet ML 的</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">模型注册表中</font></font></li>
+</ul>
+<p dir="auto"><font style="vertical-align: inherit;"></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">训练管道</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用</font><font style="vertical-align: inherit;">Beam</font><a href="https://docs.beam.cloud/getting-started/quickstart?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow"><font style="vertical-align: inherit;">作为</font></a><font style="vertical-align: inherit;">无服务器 GPU 基础设施</font><font style="vertical-align: inherit;">进行</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">部署。</font></font></strong><font style="vertical-align: inherit;"></font><a href="https://docs.beam.cloud/getting-started/quickstart?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-&gt; 在</font></font><code>modules/training_pipeline</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">目录下找到。</font></font></p>
+<h4 tabindex="-1" dir="auto"><a id="user-content--minimum-hardware-requirements" class="anchor" aria-hidden="true" tabindex="-1" href="#-minimum-hardware-requirements"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">💻 最低硬件要求</font></font></h4>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPU：4核</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">内存：14GB</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">VRAM：10 GiB（强制启用 CUDA 的 Nvidia GPU）</font></font></li>
+</ul>
+<p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注意：</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您没有达到最低硬件要求，请不要担心。</font><font style="vertical-align: inherit;">我们将向您展示如何将培训管道部署到</font></font><a href="https://docs.beam.cloud/getting-started/quickstart?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Beam 的</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">无服务器基础设施并在那里培训LLM。</font></font></p>
+<h3 tabindex="-1" dir="auto"><a id="user-content-12-streaming-real-time-pipeline" class="anchor" aria-hidden="true" tabindex="-1" href="#12-streaming-real-time-pipeline"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.2. </font><font style="vertical-align: inherit;">流式实时管道</font></font></h3>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">实时特征管道：</font></font></p>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><a href="https://alpaca.markets/docs/api-references/market-data-api/news-data/" rel="nofollow"><font style="vertical-align: inherit;">从Alpaca</font></a><font style="vertical-align: inherit;">获取财经新闻</font></font><a href="https://alpaca.markets/docs/api-references/market-data-api/news-data/" rel="nofollow"><font style="vertical-align: inherit;"></font></a></li>
+<li><font style="vertical-align: inherit;"><a href="https://github.com/bytewax/bytewax?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github"><font style="vertical-align: inherit;">使用Bytewax</font></a><font style="vertical-align: inherit;">实时清理新闻文档并将其转换为嵌入内容</font></font><a href="https://github.com/bytewax/bytewax?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github"><font style="vertical-align: inherit;"></font></a></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将嵌入存储到</font></font><a href="https://qdrant.tech/?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Qdrant Vector DB中</font></font></a></li>
+</ul>
+<p dir="auto">The <strong>streaming pipeline</strong> is <strong>automatically deployed</strong> on an AWS EC2 machine using a CI/CD pipeline built in GitHub actions.</p>
+<p dir="auto">-&gt; Found under the <code>modules/streaming_pipeline</code> directory.</p>
+<h4 tabindex="-1" dir="auto"><a id="user-content--minimum-hardware-requirements-1" class="anchor" aria-hidden="true" tabindex="-1" href="#-minimum-hardware-requirements-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>💻 Minimum Hardware Requirements</h4>
+<ul dir="auto">
+<li>CPU: 1 Core</li>
+<li>RAM: 2 GiB</li>
+<li>VRAM: -</li>
+</ul>
+<h3 tabindex="-1" dir="auto"><a id="user-content-13-inference-pipeline" class="anchor" aria-hidden="true" tabindex="-1" href="#13-inference-pipeline"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>1.3. Inference Pipeline</h3>
+<p dir="auto">Inference pipeline that uses <a href="https://github.com/langchain-ai/langchain">LangChain</a> to create a chain that:</p>
+<ul dir="auto">
+<li>downloads the fine-tuned model from <a href="https://www.comet.com?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow">Comet's</a> model registry</li>
+<li>takes user questions as input</li>
+<li>queries the <a href="https://qdrant.tech/?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow">Qdrant Vector DB</a> and enhances the prompt with related financial news</li>
+<li>calls the fine-tuned LLM for financial advice using the initial query, the context from the vector DB, and the chat history</li>
+<li>persists the chat history into memory</li>
+<li>logs the prompt &amp; answer into <a href="https://www.comet.com/site/products/llmops/?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow">Comet ML's</a> LLMOps monitoring feature</li>
+</ul>
+<p dir="auto">The <strong>inference pipeline</strong> is <strong>deployed</strong> using <a href="https://docs.beam.cloud/deployment/rest-api?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow">Beam</a> as a serverless GPU infrastructure, as a RESTful API. Also, it is wrapped under a UI for demo purposes, implemented in <a href="https://www.gradio.app/" rel="nofollow">Gradio</a>.</p>
+<p dir="auto">-&gt; Found under the <code>modules/financial_bot</code> directory.</p>
+<h4 tabindex="-1" dir="auto"><a id="user-content--minimum-hardware-requirements-2" class="anchor" aria-hidden="true" tabindex="-1" href="#-minimum-hardware-requirements-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>💻 Minimum Hardware Requirements</h4>
+<ul dir="auto">
+<li>CPU: 4 Cores</li>
+<li>RAM: 14 GiB</li>
+<li>VRAM: 8 GiB (mandatory CUDA-enabled Nvidia GPU)</li>
+</ul>
+<p dir="auto"><strong>Note:</strong> Do not worry if you don't have the minimum hardware requirements. We will show you how to deploy the inference pipeline to <a href="https://docs.beam.cloud/getting-started/quickstart?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow">Beam's</a> serverless infrastructure and call the LLM from there.</p>
+<br>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="/iusztinpaul/hands-on-llms/blob/main/media/architecture.png"><img src="/iusztinpaul/hands-on-llms/raw/main/media/architecture.png" alt="建筑学" style="max-width: 100%;"></a></p>
+<h4 tabindex="-1" dir="auto"><a id="user-content-14-financial-qa-dataset" class="anchor" aria-hidden="true" tabindex="-1" href="#14-financial-qa-dataset"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>1.4. Financial Q&amp;A Dataset</h4>
+<p dir="auto">We used <code>GPT3.5</code> to generate a financial Q&amp;A dataset to fine-tune our open-source LLM to specialize in using financial terms and answering financial questions. Using a large LLM, such as <code>GPT3.5</code> to generate a dataset that trains a smaller LLM (e.g., Falcon 7B) is known as <strong>fine-tuning with distillation</strong>.</p>
+<p dir="auto">→ To understand how we generated the financial Q&amp;A dataset, <a href="https://open.substack.com/pub/paulabartabajo/p/how-to-generate-financial-q-and-a?r=1ttoeh&amp;utm_campaign=post&amp;utm_medium=web" rel="nofollow">check out this article</a> written by <a href="https://github.com/Paulescu">Pau Labarta</a>.</p>
+<p dir="auto">→ To see a complete analysis of the financial Q&amp;A dataset, check out the <a href="https://github.com/iusztinpaul/hands-on-llms/blob/main/dataset_analysis">dataset_analysis</a> subsection of the course written by <a href="https://github.com/Joywalker">Alexandru Razvant</a>.</p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="/iusztinpaul/hands-on-llms/blob/main/media/eda_prompts_dataset.png"><img src="/iusztinpaul/hands-on-llms/raw/main/media/eda_prompts_dataset.png" alt="电子设计自动化" style="max-width: 100%;"></a></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-2-setup-external-services" class="anchor" aria-hidden="true" tabindex="-1" href="#2-setup-external-services"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>2. Setup External Services</h2>
+<p dir="auto">Before diving into the modules, you have to set up a couple of additional external tools for the course.</p>
+<p dir="auto"><strong>NOTE:</strong> You can set them up as you go for every module, as we will point you in every module what you need.</p>
+<h3 tabindex="-1" dir="auto"><a id="user-content-21-alpaca" class="anchor" aria-hidden="true" tabindex="-1" href="#21-alpaca"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>2.1. Alpaca</h3>
+<p dir="auto"><code>financial news data source</code></p>
+<p dir="auto">Follow this <a href="https://alpaca.markets/docs/market-data/getting-started/" rel="nofollow">document</a> to show you how to create a FREE account and generate the API Keys you will need within this course.</p>
+<p dir="auto"><strong>Note:</strong> 1x Alpaca data connection is FREE.</p>
+<h3 tabindex="-1" dir="auto"><a id="user-content-22-qdrant" class="anchor" aria-hidden="true" tabindex="-1" href="#22-qdrant"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>2.2. Qdrant</h3>
+<p dir="auto"><code>serverless vector DB</code></p>
+<p dir="auto">Go to <a href="https://qdrant.tech/?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow">Qdrant</a> and create a FREE account.</p>
+<p dir="auto">After, follow <a href="https://qdrant.tech/documentation/cloud/authentication/?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow">this document</a> on how to generate the API Keys you will need within this course.</p>
+<p dir="auto"><strong>Note:</strong> We will use only Qdrant's freemium plan.</p>
+<h3 tabindex="-1" dir="auto"><a id="user-content-23-comet-ml" class="anchor" aria-hidden="true" tabindex="-1" href="#23-comet-ml"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>2.3. Comet ML</h3>
+<p dir="auto"><code>serverless ML platform</code></p>
+<p dir="auto">Go to <a href="https://www.comet.com/signup?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow">Comet ML</a> and create a FREE account.</p>
+<p dir="auto">After, <a href="https://www.comet.com/docs/v2/guides/getting-started/quickstart/" rel="nofollow">follow this guide</a> to generate an API KEY and a new project, which you will need within the course.</p>
+<p dir="auto"><strong>Note:</strong> We will use only Comet ML's freemium plan.</p>
+<h3 tabindex="-1" dir="auto"><a id="user-content-24-beam" class="anchor" aria-hidden="true" tabindex="-1" href="#24-beam"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>2.4. Beam</h3>
+<p dir="auto"><code>serverless GPU compute | training &amp; inference pipelines</code></p>
+<p dir="auto">Go to <a href="https://www.beam.cloud?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow">Beam</a> and create a FREE account.</p>
+<p dir="auto">After, you must follow their <a href="https://docs.beam.cloud/getting-started/installation?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow">installation guide</a> to install their CLI &amp; configure it with your Beam credentials.</p>
+<p dir="auto">To read more about Beam, here is an <a href="https://docs.beam.cloud/getting-started/introduction?utm_source=thepauls&amp;utm_medium=partner&amp;utm_content=github" rel="nofollow">introduction guide</a>.</p>
+<p dir="auto"><strong>Note:</strong> You have ~10 free compute hours. Afterward, you pay only for what you use. If you have an Nvidia GPU &gt;8 GB VRAM &amp; don't want to deploy the training &amp; inference pipelines, using Beam is optional.</p>
+<h4 tabindex="-1" dir="auto"><a id="user-content-troubleshooting" class="anchor" aria-hidden="true" tabindex="-1" href="#troubleshooting"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>Troubleshooting</h4>
+<p dir="auto">When using Poetry, we had issues locating the Beam CLI inside a Poetry virtual environment. To fix this, after installing Beam, we create a symlink that points to Poetry's binaries, as follows:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre> <span class="pl-k">export</span> COURSE_MODULE_PATH=<span class="pl-k">&lt;</span>your-course-module-path<span class="pl-k">&gt;</span> <span class="pl-c"><span class="pl-c">#</span> e.g., modules/training_pipeline</span>
+ <span class="pl-c1">cd</span> <span class="pl-smi">$COURSE_MODULE_PATH</span>
+ <span class="pl-k">export</span> POETRY_ENV_PATH=<span class="pl-s"><span class="pl-pds">$(</span>dirname <span class="pl-s"><span class="pl-pds">$(</span>dirname <span class="pl-s"><span class="pl-pds">$(</span>poetry run which python<span class="pl-pds">)</span></span><span class="pl-pds">)</span></span><span class="pl-pds">)</span></span>
+
+ ln -s /usr/local/bin/beam <span class="pl-smi">${POETRY_ENV_PATH}</span>/bin/beam</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value=" export COURSE_MODULE_PATH=<your-course-module-path> # e.g., modules/training_pipeline
+ cd $COURSE_MODULE_PATH
+ export POETRY_ENV_PATH=$(dirname $(dirname $(poetry run which python)))
+
+ ln -s /usr/local/bin/beam ${POETRY_ENV_PATH}/bin/beam" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<h3 tabindex="-1" dir="auto"><a id="user-content-25-aws" class="anchor" aria-hidden="true" tabindex="-1" href="#25-aws"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>2.5. AWS</h3>
+<p dir="auto"><code>cloud compute | feature pipeline</code></p>
+<p dir="auto">Go to <a href="https://aws.amazon.com/console/" rel="nofollow">AWS</a>, create an account, and generate a pair of credentials.</p>
+<p dir="auto">After, download and install their <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html" rel="nofollow">AWS CLI v2.11.22</a> and <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html" rel="nofollow">configure it</a> with your credentials.</p>
+<p dir="auto"><strong>Note:</strong> You will pay only for what you use. You will deploy only a <code>t2.small</code> EC2 VM, which is only <code>~$0.023</code> / hour. If you don't want to deploy the feature pipeline, using AWS is optional.</p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-3-install--usage" class="anchor" aria-hidden="true" tabindex="-1" href="#3-install--usage"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>3. Install &amp; Usage</h2>
+<p dir="auto">Every module has its dependencies and scripts. In a production setup, every module would have its repository, but in this use case, for learning purposes, we put everything in one place:</p>
+<p dir="auto">Thus, check out the README for every module individually to see how to install &amp; use it:</p>
+<ol dir="auto">
+<li><a href="/iusztinpaul/hands-on-llms/blob/main/modules/q_and_a_dataset_generator">q_and_a_dataset_generator</a></li>
+<li><a href="/iusztinpaul/hands-on-llms/blob/main/modules/training_pipeline">training_pipeline</a></li>
+<li><a href="/iusztinpaul/hands-on-llms/blob/main/modules/streaming_pipeline">streaming_pipeline</a></li>
+<li><a href="/iusztinpaul/hands-on-llms/blob/main/modules/financial_bot">inference_pipeline</a></li>
+</ol>
+<h2 tabindex="-1" dir="auto"><a id="user-content-4-video-lectures" class="anchor" aria-hidden="true" tabindex="-1" href="#4-video-lectures"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>4. Video lectures</h2>
+<h3 tabindex="-1" dir="auto"><a id="user-content-40-intro-to-the-course" class="anchor" aria-hidden="true" tabindex="-1" href="#40-intro-to-the-course"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>4.0 Intro to the course</h3>
+<div align="center" dir="auto">
+  <a href="https://www.youtube.com/watch?v=l4HTEf0_s70" rel="nofollow">
+      <p dir="auto">Click here to watch the video 🎬</p>
+    <img src="/iusztinpaul/hands-on-llms/raw/main/media/youtube_thumbnails/00_intro.png" alt="课程简介" style="width: 75%; max-width: 100%;">
   </a>
 </div>
-
-
-### 4.1 Fine-tuning our open-source LLM (overview)
-
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=HcxwOYMmj40">
-      <p>Click here to watch the video 🎬</p>
-    <img src="media/youtube_thumbnails/01_fine_tuning_pipeline_overview.png" alt="Intro to the course" style="width:75%;">
+<h3 tabindex="-1" dir="auto"><a id="user-content-41-fine-tuning-our-open-source-llm-overview" class="anchor" aria-hidden="true" tabindex="-1" href="#41-fine-tuning-our-open-source-llm-overview"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>4.1 Fine-tuning our open-source LLM (overview)</h3>
+<div align="center" dir="auto">
+  <a href="https://www.youtube.com/watch?v=HcxwOYMmj40" rel="nofollow">
+      <p dir="auto">Click here to watch the video 🎬</p>
+    <img src="/iusztinpaul/hands-on-llms/raw/main/media/youtube_thumbnails/01_fine_tuning_pipeline_overview.png" alt="课程简介" style="width: 75%; max-width: 100%;">
   </a>
 </div>
-
-### 4.2 Fine-tuning our open-source LLM (Hands-on!)
-
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=RS96R0dH0uE">
-      <p>Click here to watch the video 🎬</p>
-    <img src="media/youtube_thumbnails/02_fine_tuning_pipeline_hands_on.png" alt="Hands-on Fine Tuning an LLM" style="width:75%;">
+<h3 tabindex="-1" dir="auto"><a id="user-content-42-fine-tuning-our-open-source-llm-hands-on" class="anchor" aria-hidden="true" tabindex="-1" href="#42-fine-tuning-our-open-source-llm-hands-on"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>4.2 Fine-tuning our open-source LLM (Hands-on!)</h3>
+<div align="center" dir="auto">
+  <a href="https://www.youtube.com/watch?v=RS96R0dH0uE" rel="nofollow">
+      <p dir="auto">Click here to watch the video 🎬</p>
+    <img src="/iusztinpaul/hands-on-llms/raw/main/media/youtube_thumbnails/02_fine_tuning_pipeline_hands_on.png" alt="亲自微调LLM" style="width: 75%; max-width: 100%;">
   </a>
 </div>
-
-### 4.3 Real-time text embedding pipeline
-
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=5gX5XRZpb6E">
-      <p>Click here to watch the video 🎬</p>
-    <img src="media/youtube_thumbnails/03_real_time_embeddings.png" alt="Real-time text embedding pipeline" style="width:75%;">
+<h3 tabindex="-1" dir="auto"><a id="user-content-43-real-time-text-embedding-pipeline" class="anchor" aria-hidden="true" tabindex="-1" href="#43-real-time-text-embedding-pipeline"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>4.3 Real-time text embedding pipeline</h3>
+<div align="center" dir="auto">
+  <a href="https://www.youtube.com/watch?v=5gX5XRZpb6E" rel="nofollow">
+      <p dir="auto">Click here to watch the video 🎬</p>
+    <img src="/iusztinpaul/hands-on-llms/raw/main/media/youtube_thumbnails/03_real_time_embeddings.png" alt="实时文本嵌入管道" style="width: 75%; max-width: 100%;">
   </a>
 </div>
-
-### 4.4 Inference pipeline
-
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=lXLv0zNdbgE">
-      <p>Click here to watch the video 🎬</p>
-    <img src="media/youtube_thumbnails/04_inference_pipeline.png" alt="Inference pipeline" style="width:75%;">
+<h3 tabindex="-1" dir="auto"><a id="user-content-44-inference-pipeline" class="anchor" aria-hidden="true" tabindex="-1" href="#44-inference-pipeline"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>4.4 Inference pipeline</h3>
+<div align="center" dir="auto">
+  <a href="https://www.youtube.com/watch?v=lXLv0zNdbgE" rel="nofollow">
+      <p dir="auto">Click here to watch the video 🎬</p>
+    <img src="/iusztinpaul/hands-on-llms/raw/main/media/youtube_thumbnails/04_inference_pipeline.png" alt="推理管道" style="width: 75%; max-width: 100%;">
   </a>
 </div>
-
-
-## 5. License
-
-This course is an open-source project released under the MIT license. Thus, as long you distribute our LICENSE and acknowledge our work, you can safely clone or fork this project and use it as a source of inspiration for whatever you want (e.g., university projects, college degree projects, etc.).
-
-## 6. Contributors & Teachers
-
+<h2 tabindex="-1" dir="auto"><a id="user-content-5-license" class="anchor" aria-hidden="true" tabindex="-1" href="#5-license"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>5. License</h2>
+<p dir="auto">This course is an open-source project released under the MIT license. Thus, as long you distribute our LICENSE and acknowledge our work, you can safely clone or fork this project and use it as a source of inspiration for whatever you want (e.g., university projects, college degree projects, etc.).</p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-6-contributors--teachers" class="anchor" aria-hidden="true" tabindex="-1" href="#6-contributors--teachers"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a>6. Contributors &amp; Teachers</h2>
 <table>
-  <tr>
-    <td><img src="https://github.com/Paulescu.png" width="100" style="border-radius:50%;"/></td>
+  <tbody><tr>
+    <td><a target="_blank" rel="noopener noreferrer" href="https://github.com/Paulescu.png"><img src="https://github.com/Paulescu.png" width="100" style="max-width: 100%;"></a></td>
     <td>
-      <strong>Pau Labarta Bajo | Senior ML & MLOps Engineer </strong><br />
-      <i>Main teacher. The guy from the video lessons.</i><br /><br />
-      <a href="https://www.linkedin.com/in/pau-labarta-bajo-4432074b/">LinkedIn</a><br />
-      <a href="https://twitter.com/paulabartabajo_">Twitter/X</a><br />
-      <a href="https://www.youtube.com/@realworldml">Youtube</a><br />
-      <a href="https://www.realworldml.xyz/subscribe">Real-World ML Newsletter</a><br />
-      <a href="https://www.realworldml.xyz/subscribe">Real-World ML Site</a>
+      <strong>Pau Labarta Bajo | Senior ML &amp; MLOps Engineer </strong><br>
+      <i>Main teacher. The guy from the video lessons.</i><br><br>
+      <a href="https://www.linkedin.com/in/pau-labarta-bajo-4432074b/" rel="nofollow">LinkedIn</a><br>
+      <a href="https://twitter.com/paulabartabajo_" rel="nofollow">Twitter/X</a><br>
+      <a href="https://www.youtube.com/@realworldml" rel="nofollow">Youtube</a><br>
+      <a href="https://www.realworldml.xyz/subscribe" rel="nofollow">Real-World ML Newsletter</a><br>
+      <a href="https://www.realworldml.xyz/subscribe" rel="nofollow">Real-World ML Site</a>
     </td>
   </tr>
   <tr>
-    <td><img src="https://github.com/Joywalker.png" width="100" style="border-radius:50%;"/></td>
+    <td><a target="_blank" rel="noopener noreferrer" href="https://github.com/Joywalker.png"><img src="https://github.com/Joywalker.png" width="100" style="max-width: 100%;"></a></td>
     <td>
-      <strong>Alexandru Razvant | Senior ML Engineer </strong><br />
-      <i>Second chef. The engineer behind the scenes.</i><br /><br />
-      <a href="https://www.linkedin.com/in/arazvant/">LinkedIn</a><br />
-      <a href="https://www.neuraleaps.com/">Neura Leaps</a>
+      <strong>Alexandru Razvant | Senior ML Engineer </strong><br>
+      <i>Second chef. The engineer behind the scenes.</i><br><br>
+      <a href="https://www.linkedin.com/in/arazvant/" rel="nofollow">LinkedIn</a><br>
+      <a href="https://www.neuraleaps.com/" rel="nofollow">Neura Leaps</a>
     </td>
   </tr>
   <tr>
-    <td><img src="https://github.com/iusztinpaul.png" width="100" style="border-radius:50%;"/></td>
+    <td><a target="_blank" rel="noopener noreferrer" href="https://github.com/iusztinpaul.png"><img src="https://github.com/iusztinpaul.png" width="100" style="max-width: 100%;"></a></td>
     <td>
-      <strong>Paul Iusztin | Senior ML & MLOps Engineer </strong><br />
-      <i>Main chef. The guys who randomly pop in the video lessons.</i><br /><br />
-      <a href="https://www.linkedin.com/in/pauliusztin/">LinkedIn</a><br />
-      <a href="https://twitter.com/iusztinpaul">Twitter/X</a><br />
-      <a href="https://pauliusztin.substack.com/">Decoding ML Newsletter</a><br />
-      <a href="https://www.pauliusztin.me/">Personal Site | ML & MLOps Hub</a>
+      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">保罗·尤斯汀 | </font><font style="vertical-align: inherit;">高级 ML &amp; MLOps 工程师</font></font></strong><br>
+      <i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">主厨。</font><font style="vertical-align: inherit;">那些随机出现在视频课程中的人。</font></font></i><br><br>
+      <a href="https://www.linkedin.com/in/pauliusztin/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">LinkedIn </font></font></a><br>
+      <a href="https://twitter.com/iusztinpaul" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Twitter/X</font></font></a><br>
+      <a href="https://pauliusztin.substack.com/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">解码 ML 时事通讯</font></font></a><br>
+      <a href="https://www.pauliusztin.me/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">个人网站 | </font><font style="vertical-align: inherit;">ML 和 MLOps 中心</font></font></a>
     </td>
   </tr>
-</table>
+</tbody></table>
+</article></div>
